@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import json
@@ -35,6 +35,15 @@ def users_all():
     users = User.query.all()
     users_list = list(map(lambda user: {'id':user.id,'name':user.username,'email':user.email} ,users))
     return jsonify(users_list)
+
+@app.route('/page')
+def home_page():
+    return render_template('index.html',mensaje='test page',mensaje2='hola desde render table')
+
+@app.route('/page2')
+def home_page2():
+    return render_template('pagina2.html',mensaje2='render template js')
+
 
 
 if __name__ == '__main__':
